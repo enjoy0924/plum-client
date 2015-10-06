@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<!-- 引入angularJS -->
+<script src="../../bower_components/angular/angular.min.js"></script>
+<script src="../../bower_components/angular-route/angular-route.min.js"></script>
+
+<!-- 引入bootstrap样式 -->
+<link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" />
+<script type="text/javascript" src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- 引入自定义JS文件 -->
+<script src="../../app/app.js"></script>
+<script src="../../app/controllers/loginCtrl.js"></script>
+<script src="../../app/services/validateCode.js"></script>
+
+<script src="../../app/directives/directives.js"></script>
+
+<body>
+    <div ng-app="app" ng-controller="loginCtrl">
+        <form>
+            username: <input type="text" ng-model="username" placeholder="请输入用户名"><br>
+            password: <input type="password" ng-model="password" placeholder="请输入密码"><br>
+            validate: <input type="text" ng-model="validateCode" placeholder="请输入验证码"><br>
+            <img ng-src="{{getImageCode()}}"/>
+            <button class="btn btn-warning" ng-click="refreshImgCode()">refresh</button>
+            <button class="btn btn-primary" ng-click="submit()">OK</button>
+        </form>
+
+        <validate-img></validate-img>
+    </div>
+</body>
+</html>
