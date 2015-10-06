@@ -2,7 +2,7 @@
  * Created by Andy on 2015/10/6.
  */
 
-app.controller('loginCtrl', function($scope, $http, $rootScope, ValidateCode){
+app.controller('loginCtrl', function($scope, $http, $rootScope,$location, ValidateCode){
     console.log("load login controller!");
     $scope.submit = function(){
         if(validate($scope.username, $scope.password, $http)){
@@ -11,17 +11,18 @@ app.controller('loginCtrl', function($scope, $http, $rootScope, ValidateCode){
             $rootScope.isLoggedIn = false;
         }
     };
+    $scope.getSmsCode = function(){
+        getSMSValidateCode($scope.cellphone, $http);
+    }
+    $scope.getImageCode = function(){ return ValidateCode.getImageValidateCode();};
+    $scope.refreshImgCode = function(){ $scope.validateImgUrl = $scope.getImageCode() + '?d=' + new Date();};
 
-    $scope.getImageCode = function(){
-        return ValidateCode.getImageValidateCode();
+    $scope.locRegister = function(){
+        $location.path('register');
     };
 
-    $scope.refreshImgCode = function(){
-        $scope.getImageCode();
-    };
-    //$scope.getSMSCode = function(){
-    //    return ValidateCode.getSMSValidateCode();
-    //}
+    //调用获取验证码
+    $scope.refreshImgCode();
 });
 
 var validate = function(username, password,$http){
@@ -37,3 +38,15 @@ var validate = function(username, password,$http){
             alert('error happened');
         });
 };
+
+var getSMSValidateCode = function(cellphone, $http){
+    var params = {
+      cellphone : cellphone
+    };
+    $http.post('http://localhost:8080/cas/validate/getsms', params)
+        .success(function(responseData){
+            alert(responseData)
+        }).error(function(){
+            alert('error happened');
+        });
+}

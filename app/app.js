@@ -3,19 +3,23 @@
  */
 var app = angular.module("app", ["ngRoute"]);
 
-app.config = function($providerRoute){
-  $providerRoute.when('',{
-
-  }).when('/login',{
-        templateUrl : 'views/login.html'
+app.config(function($routeProvider){
+    $routeProvider.when('/login',{
+      templateUrl : 'app/views/login.html'
+  }).when('/register',{
+        templateUrl : 'app/views/register.html'
   }).when('/index', {
         "check":function($rootScope, $location){
             if(!$rootScope.isLoggedIn){
                 $location.path('/login')
             }
         },
-      templateUrl: 'view/index.html'
+      templateUrl: '/index.html'
   }).otherwise({
-        templateUrl : 'views/login.html'
+        templateUrl : 'app/views/login.html'
   })
-};
+});
+
+app.config(function($httpProvider){
+    $httpProvider.defaults.headers.post['Content-Type']='application/json;charset=utf-8';
+});
