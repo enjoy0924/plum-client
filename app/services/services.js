@@ -1,7 +1,7 @@
 /**
  * Created by Andy on 2015/10/5.
  */
-define(['index'], function(angularServiceModule){
+define(['./index'], function(angularServiceModule){
     angularServiceModule.factory('ValidateCode', function (CONST) {
         return {
             getImageValidateCode : function(){

@@ -1,25 +1,27 @@
 /**
  * Created by Andy on 2015/10/5.
  */
-var app = angular.module("app", ["ngRoute"]);
+define(['./index'], function(app){
+    app.config(function($routeProvider){
+        $routeProvider.when('/login',{
+            templateUrl : 'app/views/login.html'
+        }).when('/register',{
+            templateUrl : 'app/views/register.html'
+        }).when('/index', {
+            "check":function($rootScope, $location){
+                if(!$rootScope.isLoggedIn){
+                    $location.path('/login')
+                }
+            },
+            templateUrl: '/index.html'
+        }).otherwise({
+            templateUrl : 'app/views/login.html'
+        })
+    });
 
-app.config(function($routeProvider){
-    $routeProvider.when('/login',{
-      templateUrl : 'app/views/login.html'
-  }).when('/register',{
-        templateUrl : 'app/views/register.html'
-  }).when('/index', {
-        "check":function($rootScope, $location){
-            if(!$rootScope.isLoggedIn){
-                $location.path('/login')
-            }
-        },
-      templateUrl: '/index.html'
-  }).otherwise({
-        templateUrl : 'app/views/login.html'
-  })
+    app.config(function($httpProvider){
+        $httpProvider.defaults.headers.post['Content-Type']='application/json;charset=utf-8';
+    });
 });
 
-app.config(function($httpProvider){
-    $httpProvider.defaults.headers.post['Content-Type']='application/json;charset=utf-8';
-});
+

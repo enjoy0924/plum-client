@@ -3,7 +3,7 @@
  * Created by Andy on 2015/10/8.
  */
 
-define(['index'], function(angularConstantModule){
+define(['./index'], function(angularConstantModule){
     var backendBase = "http://localhost:8080/";
     angularConstantModule.constant('CONST', {
         /**1.验证相关的URL **/

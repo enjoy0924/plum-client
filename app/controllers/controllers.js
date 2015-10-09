@@ -1,7 +1,7 @@
 /**
  * Created by Andy on 2015/10/5.
  */
-define(['index'], function(angularControllerModule){
+define(['./index'], function(angularControllerModule){
     angularControllerModule.controller('loginCtrl', function($scope, $http, $rootScope,$location, ValidateCode){
         console.log("load login controller!");
         $scope.submit = function(){
