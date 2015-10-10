@@ -2,7 +2,7 @@
  * Created by Andy on 2015/10/5.
  */
 define(['./index'], function(app){
-    app.config(function($routeProvider){
+   app.config(function($routeProvider){
         $routeProvider.when('/login',{
             templateUrl : 'app/views/login.html'
         }).when('/register',{
@@ -15,13 +15,12 @@ define(['./index'], function(app){
             },
             templateUrl: '/index.html'
         }).otherwise({
-            templateUrl : 'app/views/login.html'
+            templateUrl : './app/views/login.html'
         })
-    });
-
-    app.config(function($httpProvider){
+    }).config(function($httpProvider){
         $httpProvider.defaults.headers.post['Content-Type']='application/json;charset=utf-8';
-    });
+    })
+
 });
 
 

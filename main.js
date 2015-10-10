@@ -22,7 +22,7 @@ require.config({
         'bootstrap':{
           deps:['jquery']
         },
-        'angular-router': {
+        'angular-route': {
             deps: ['angular']
         }
     }

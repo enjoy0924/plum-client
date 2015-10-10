@@ -8,9 +8,9 @@
 define([
     'require',
     'angular',
-    'app/app'
-], function () {
-    require(['domReady'],function(){
-        angular.bootstrap(document,[],'app');
+    './app/app'
+], function (require, ng) {
+    require(['domReady!'], function (document) {
+        return ng.bootstrap(document, ['app']);
     });
 });
