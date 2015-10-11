@@ -23,16 +23,18 @@ define(['./app'], function (app) {
 
         $routeProvider.when('/view1', {
             templateUrl: 'partials/partial1.html',
-            controller: 'MyCtrl1'
+            //controller: 'MyCtrl1'
         });
 
         $routeProvider.when('/view2', {
             templateUrl: 'partials/partial2.html',
-            controller: 'MyCtrl2'
+            //controller: 'MyCtrl2'
         });
 
         $routeProvider.otherwise({
             redirectTo: '/view1'
         });
+    }]).config(['$httpProvider', function($httpProvider) {
+        $httpProvider.defaults.withCredentials = true;
     }]);
 });

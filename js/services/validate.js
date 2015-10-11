@@ -19,8 +19,14 @@ define(['./module'], function (services) {
                 );
             },
 
-            validateImageCode : function(){
-
+            validateImageCode : function(imagecode){
+                var params = { };
+                params.imgcode = imagecode;
+                $http.post(globalVariable.URL_VALIDATE_POST_IMG_CODE, params).success(
+                    function(response){
+                        alert(response+'validate validate-code successfully!');
+                    }
+                );
             }
         }
     }]);

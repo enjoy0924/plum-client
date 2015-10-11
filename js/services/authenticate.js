@@ -3,8 +3,8 @@
  * Created by Andy on 2015/10/11.
  */
 define(['./module'], function (services) {
-    services.factory('principal', ['$q', '$http', '$timeout',
-        function ($q, $http, $timeout) {
+    services.factory('principal', ['$q', '$http', '$timeout', 'globalVariable',
+        function ($q, $http, $timeout, globalVariable) {
             var _identity = undefined;
             var _authenticated = false;
 
@@ -34,7 +34,7 @@ define(['./module'], function (services) {
                     _identity = identity;
                     _authenticated = (identity != null);
                 },
-                identity: function (force) {
+                identity: function (token,force) {
                     var deferred = $q.defer();
 
                     if (force === true) _identity = undefined;
@@ -48,27 +48,26 @@ define(['./module'], function (services) {
                     }
 
                     // otherwise, retrieve the identity data from the server, update the identity object, and then resolve.
-                    //                   $http.get('/svc/account/identity', { ignoreErrors: true })
-                    //                        .success(function(data) {
-                    //                            _identity = data;
-                    //                            _authenticated = true;
-                    //                            deferred.resolve(_identity);
-                    //                        })
-                    //                        .error(function () {
-                    //                            _identity = null;
-                    //                            _authenticated = false;
-                    //                            deferred.resolve(_identity);
-                    //                        });
+                    $http.post(globalVariable.URL_AUTH_POST_LOGIN, token).success(function(data) {
+                        _identity = data;
+                        _authenticated = true;
+                        deferred.resolve(_identity);
+                    }).error(function () {
+                        _identity = null;
+                        _authenticated = false;
+                        deferred.resolve(_identity);
+                    });
 
                     // for the sake of the demo, fake the lookup by using a timeout to create a valid
                     // fake identity. in reality,  you'll want something more like the $http request
                     // commented out above. in this example, we fake looking up to find the user is
                     // not logged in
-                    var self = this;
-                    $timeout(function () {
-                        self.authenticate(null);
-                        deferred.resolve(_identity);
-                    }, 1000);
+
+                    //var self = this;
+                    //$timeout(function () {
+                    //    self.authenticate(null);
+                    //    deferred.resolve(_identity);
+                    //}, 1000);
 
                     return deferred.promise;
                 }
