@@ -34,7 +34,8 @@ define(['./app'], function (app) {
         $routeProvider.otherwise({
             redirectTo: '/view1'
         });
-    }]).config(['$httpProvider', function($httpProvider) {
-        $httpProvider.defaults.withCredentials = true;
-    }]);
+    }])
+    //    .config(['$httpProvider', function($httpProvider) {
+    //    $httpProvider.defaults.withCredentials = true;
+    //}]);
 });
