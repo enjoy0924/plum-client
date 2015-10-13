@@ -1,5 +1,5 @@
 /**
- * 验证码服务
+ *
  * Created by Andy on 2015/10/11.
  */
 define(['./module'], function (services) {
