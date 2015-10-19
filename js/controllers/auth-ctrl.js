@@ -9,11 +9,11 @@ define(['./module'], function (controllers) {
         $scope._refreshImgCode();
 
         $scope._login = function(){
-            var token = new Object();
-            token.principal = $scope._username
-            token.credential = $scope._password;
-            token.verifyCode = $scope._validate_code;
-            token.rememberMe = $scope._remember_me;
+                var token = new Object();
+                token.principal = $scope._username
+                token.credential = $scope._password;
+                token.verifyCode = $scope._validate_code;
+                token.rememberMe = $scope._remember_me;
             token.appKey = "645ba616-370a-43a8-a8e0-993e7a590cf0";
 
             principal.identity(token,true).then(

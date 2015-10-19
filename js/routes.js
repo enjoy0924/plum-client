@@ -16,6 +16,11 @@ define(['./app'], function (app) {
             controller:'registerCtrl'
         });
 
+        $routeProvider.when('/myspace',{
+            templateUrl:'partials/content/space-content.html',
+            controller:'fsCtrl'
+        });
+
         $routeProvider.when('/welcome',{
             templateUrl:'partials/welcome.html',
             resolve:''
@@ -35,7 +40,4 @@ define(['./app'], function (app) {
             redirectTo: '/view1'
         });
     }])
-    //    .config(['$httpProvider', function($httpProvider) {
-    //    $httpProvider.defaults.withCredentials = true;
-    //}]);
 });

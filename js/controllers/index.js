@@ -6,5 +6,7 @@
  **/
 define([
     './auth-ctrl',
-    './register-ctrl'
+    './register-ctrl',
+    './header-ctrl',
+    './filesystem-ctrl'
 ], function () {});
