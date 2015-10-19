@@ -1,0 +1,33 @@
+.attach_box {
+    width: 160px;
+    height: 146px;
+    border: 1px solid white;
+    margin: 5px 10px 10px 5px;
+    cursor: pointer;
+    float: left;
+}
+
+.attach_img {
+    height: 105px;
+}
+
+.attach_img .dir_bk {
+     height: 105px;
+     background-image: url('../images/dir_icon.gif');
+}
+
+.attach_img .doc_bk {
+    height: 105px;
+    background-image: url('../images/file_icon.png');
+}
+
+.attach_name {
+    text-align: center;
+    padding-top: 6px;
+    padding-left: 4px;
+    border: 1px solid #bbb;
+    border-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
