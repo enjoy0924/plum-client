@@ -1,0 +1,25 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        this is content header!
+        <button class="btn-success">New File Folder</button>
+        <button class="btn-success">Upload File</button>
+        <button class="btn-primary">Rename</button>
+        <button class="btn-primary">Move To</button>
+        <button class="btn-danger">Delete</button>
+        <button class="btn-danger">Permission</button>
+    </section>
+
+    <section class="content">
+        <!--<ul>-->
+            <div ng-repeat="file in files"  id="" sign="dir" class="attach_box " onclick="selectDoc($(this));" ondblclick="enter($(this));">
+                <div class="attach_img" ng-switch="file.type">
+                    <div ng-switch-when="1" class="dir_bk"></div>
+                    <div ng-switch-when="2" class="doc_bk"></div>
+                </div>
+                <div class="attach_name" ondblclick="rename();">{{file.name}}</div>
+            </div>
+        <!--</ul>-->
+
+
+    </section>
+</div>
