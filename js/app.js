@@ -3,7 +3,7 @@
  * this should be used for top-level module definitions only
  */
 define([
-    'angular', 'angular-route', 'angular-bootstrap',
+    'angular', 'angular-route', 'angular-bootstrap','angular-ui-route',
     './constants/index',
     './controllers/index',
     './directives/index',
@@ -14,6 +14,7 @@ define([
 
     return ng.module('app', [
         'ngRoute',
+        'ui.router',
         'app.constants',
         'app.services',
         'app.controllers',

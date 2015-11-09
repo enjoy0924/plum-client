@@ -3,15 +3,16 @@
  */
 define(['./module'], function (controllers) {
     'use strict';
-    controllers.controller('registerCtrl', ['$scope','validate', function ($scope,validate) {
+    controllers.controller('registerCtrl', ['$scope','ValidateService', function ($scope, ValidateService) {
+        $scope.data = {};
 
-        $scope._refreshImgCode = function(){
-            $scope._imageUrl = validate.getImageCode();
+        $scope.imgUrl = ValidateService.getImageCodeUrl();
+        $scope.onImgRefresh = function(){
+            $scope.imgUrl = ValidateService.getImageCodeUrl();
         }
-        $scope._refreshImgCode();
 
-        $scope._getSmsCode = function(){
-            validate.getSmsCode($scope._cellphone);
+        $scope.getSmsCode = function(){
+            ValidateService.getSmsCode($scope.data.cellphone);
         }
     }]);
 });

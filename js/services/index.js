@@ -7,7 +7,6 @@
  **/
 define([
     './version',
-    './authenticate',
-    './authorization',
-    './validate'
+    './auth-service',
+    './validate-service'
 ], function () {});

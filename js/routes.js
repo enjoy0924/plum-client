@@ -5,39 +5,83 @@
 
 define(['./app'], function (app) {
     'use strict';
-    return app.config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/login', {
-            templateUrl:'partials/login.html',
-            controller:'authCtrl'
-        });
+    app.config(function ($stateProvider, $urlRouterProvider, USER_ROLES) {
+        $stateProvider.state('login', {
+                url: '/login',
+                templateUrl: 'templates/login.html',
+                controller: 'loginCtrl'
+            })
+            .state('register',{
+                url:'/register',
+                templateUrl: 'templates/register.html',
+                controller:'registerCtrl'
+            })
+            .state('main', {
+                url: '/main',
+                //abstract: true,
+                templateUrl: 'templates/main.html'
+            })
+            .state('main.dash', {
+                url: 'main/dash',
+                views: {
+                    'dash-tab': {
+                        templateUrl: 'templates/dashboard.html',
+                        controller: 'DashCtrl'
+                    }
+                }
+            })
+            .state('main.public', {
+                url: 'main/public',
+                views: {
+                    'public-tab': {
+                        templateUrl: 'templates/public.html'
+                    }
+                }
+            })
+            .state('main.admin', {
+                url: 'main/admin',
+                views: {
+                    'admin-tab': {
+                        templateUrl: 'templates/admin.html'
+                    }
+                },
+                data: {
+                    authorizedRoles: [USER_ROLES.ROLE_ADMIN]
+                }
+            });
+        //$urlRouterProvider.otherwise('/main/dash');
+        $urlRouterProvider.otherwise("login");
+    })
 
-        $routeProvider.when('/register',{
-            templateUrl:'partials/register.html',
-            controller:'registerCtrl'
-        });
+    //.run(function($httpBackend){
+    //    $httpBackend.whenGET('http://localhost:8100/valid')
+    //        .respond({message: 'This is my valid response!'});
+    //    $httpBackend.whenGET('http://localhost:8100/notauthenticated')
+    //        .respond(401, {message: "Not Authenticated"});
+    //    $httpBackend.whenGET('http://localhost:8100/notauthorized')
+    //        .respond(403, {message: "Not Authorized"});
+    //
+    //    $httpBackend.whenGET(/templates\/\w+.*/).passThrough();
+    //})
 
-        $routeProvider.when('/myspace',{
-            templateUrl:'partials/content/space-content.html',
-            controller:'fsCtrl'
-        });
+    .run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
+        $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {
 
-        $routeProvider.when('/welcome',{
-            templateUrl:'partials/welcome.html',
-            resolve:''
-        });
+            if ('data' in next && 'authorizedRoles' in next.data) {
+                var authorizedRoles = next.data.authorizedRoles;
+                if (!AuthService.isAuthorized(authorizedRoles)) {
+                    event.preventDefault();
+                    $state.go($state.current, {}, {reload: true});
+                    $rootScope.$broadcast(AUTH_EVENTS.NOT_AUTHORIZED);
+                }
+            }
 
-        $routeProvider.when('/view1', {
-            templateUrl: 'partials/partial1.html',
-            //controller: 'MyCtrl1'
+            if (!AuthService.isAuthenticated()) {
+                if (next.name !== 'login' && next.name != 'register') {
+                    event.preventDefault();
+                    $state.go('login');
+                }
+            }
         });
-
-        $routeProvider.when('/view2', {
-            templateUrl: 'partials/partial2.html',
-            //controller: 'MyCtrl2'
-        });
-
-        $routeProvider.otherwise({
-            redirectTo: '/view1'
-        });
-    }])
+    });
 });

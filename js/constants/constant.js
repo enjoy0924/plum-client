@@ -3,8 +3,7 @@
  */
 define(['./module'], function(constants){
     var backendBase = "http://localhost:8080/";
-    constants.constant('globalVariable', {
-
+    constants.constant('REQ_URLS', {
         URL_VALIDATE_GET_IMG_CODE  : backendBase + "cas/validate/getimage",
         URL_VALIDATE_GET_SMS_CODE  : backendBase + "cas/validate/getsms",
         URL_VALIDATE_POST_IMG_CODE : backendBase + "cas/validate/imgcode",
@@ -18,5 +17,11 @@ define(['./module'], function(constants){
         URL_USER_POST_UPDATE : backendBase + "cas/user/update",
         URL_USER_GET_LIST_ALL: backendBase + "cas/user/getall"
 
-    });
+    }).constant('AUTH_EVENTS', {  //认证事件
+        NOT_AUTHENTICATED: 'auth-not-authenticated',
+        NOT_AUTHORIZED: 'auth-not-authorized'
+    }).constant('USER_ROLES', {  //用户角色
+        ROLE_ADMIN: 'admin_role',
+        ROLE_PUBLIC: 'public_role'
+        });
 });

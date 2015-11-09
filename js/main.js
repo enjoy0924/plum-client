@@ -7,11 +7,12 @@ require.config({
 
     paths: {
         'domReady': '../lib/requirejs-domready/domReady',
-        'angular': '../lib/angular/angular',
-        'angular-route':'../lib/angular-route/angular-route',
-        'angular-bootstrap':'../lib/angular-bootstrap/ui-bootstrap',
-        'twitter-bootstrap':'../lib/bootstrap/dist/js/bootstrap',
-        'jquery':'../lib/jquery/dist/jquery'
+        'angular': '../lib/angular/angular.min',
+        'angular-route':'../lib/angular-route/angular-route.min',
+        'angular-ui-route':'../lib/angular-ui-router/release/angular-ui-router.min',
+        'angular-bootstrap':'../lib/angular-bootstrap/ui-bootstrap.min',
+        'twitter-bootstrap':'../lib/bootstrap/dist/js/bootstrap.min',
+        'jquery':'../lib/jquery/dist/jquery.min'
     },
 
     /**
@@ -25,6 +26,10 @@ require.config({
         'angular-route':{
             deps:['angular'],
             exports:'angular-route'
+        },
+        'angular-ui-route':{
+            deps:['angular'],
+            exports:'angular-ui-route'
         },
         'angular-bootstrap':{
             deps:['angular'],

@@ -1,29 +1,31 @@
 /**
- * Created by Andy on 2015/10/11.
+ * Created by Andy on 2015/11/7.
  */
-define(['./module'], function (controllers) {
-    'use strict';
-    controllers.controller('authCtrl', ['$scope','validate', 'principal', function ($scope,validate, principal) {
+define(['./module'], function(controllers){
+    controllers.controller('loginCtrl', function($scope, $state, AuthService, ValidateService) {
+        $scope.data = {};
 
-        $scope._refreshImgCode = function(){ $scope._imageUrl = validate.getImageCode();}
-        $scope._refreshImgCode();
+        //$scope.setCurrentUsername = function(name) {
+        //    $scope.username = name;
+        //};
+        //$scope.onImgRefresh();
+        $scope.imgUrl = ValidateService.getImageCodeUrl();
 
-        $scope._login = function(){
-                var token = new Object();
-                token.principal = $scope._username
-                token.credential = $scope._password;
-                token.verifyCode = $scope._validate_code;
-                token.rememberMe = $scope._remember_me;
-            token.appKey = "645ba616-370a-43a8-a8e0-993e7a590cf0";
+        $scope.onImgRefresh = function(){
+            $scope.imgUrl = ValidateService.getImageCodeUrl();
+        };
 
-            principal.identity(token,true).then(
-                function(data){   //promise resolve
-                    alert('successful ' + JSON.stringify(data));
-                },
-                function(data){   //promise reject
-                    alert('error happened ' + JSON.stringify(data));
-                }
-            );
-        }
-    }]);
-});
+        $scope.login = function(data) {
+            console.log(JSON.stringify(data));
+            AuthService.login(data).then(function(authenticated) {
+                $state.go('main', {}, {reload: true});  //如果登录成功，调整到main
+                //$scope.setCurrentUsername(data.username);
+            }, function(err) {
+                //var alertPopup = $ionicPopup.alert({
+                //    title: 'Login failed!',
+                //    template: 'Please check your credentials!'
+                //});
+            });
+        };
+    })
+})
