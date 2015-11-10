@@ -2,8 +2,10 @@
  * Created by Andy on 2015/11/7.
  */
 define(['./module'], function(controllers){
-    controllers.controller('loginCtrl', function($scope, $state, AuthService, ValidateService) {
-        $scope.data = {};
+    controllers.controller('loginCtrl', function($scope, $state, AuthService, ValidateService, APP_KEYS) {
+        $scope.data = {
+            appKey:APP_KEYS.APP_KEY_01
+        };
 
         //$scope.setCurrentUsername = function(name) {
         //    $scope.username = name;

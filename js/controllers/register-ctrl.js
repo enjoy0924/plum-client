@@ -1,9 +1,10 @@
 /**
+ *
  * Created by Andy on 2015/10/11.
  */
 define(['./module'], function (controllers) {
     'use strict';
-    controllers.controller('registerCtrl', ['$scope','ValidateService', function ($scope, ValidateService) {
+    controllers.controller('registerCtrl', function ($scope, ValidateService) {
         $scope.data = {};
 
         $scope.imgUrl = ValidateService.getImageCodeUrl();
@@ -14,5 +15,5 @@ define(['./module'], function (controllers) {
         $scope.getSmsCode = function(){
             ValidateService.getSmsCode($scope.data.cellphone);
         }
-    }]);
+    });
 });

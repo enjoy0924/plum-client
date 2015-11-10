@@ -51,14 +51,15 @@ define(['./module'], function (services) {
             return $q(function (resolve, reject) {
                 $http.post(REQ_URLS.URL_AUTH_POST_LOGIN, loginParams)
                     .success(function (data, status, headers, config) {
-                        debugger;
                         //$window.sessionStorage.token = data.token;
                         //$scope.isAuthenticated = true;
                         //var encodedProfile = data.token.split('.')[1];
                         //var profile = JSON.parse(url_base64_decode(encodedProfile));
                         //$scope.welcome = 'Welcome ' + profile.first_name + ' ' + profile.last_name;
-                        storeUserCredentials(name +'.'+ data.token);
-                        resolve('Login success.');
+                        if(data.result.code == 0){
+                            storeUserCredentials(name +'.'+ data.token);
+                            resolve(data);
+                        }
                     })
                     .error(function (data, status, headers, config) {
                         // Erase the token if the user fails to log in

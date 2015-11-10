@@ -8,5 +8,5 @@
 define([
     './version',
     './auth-service',
-    './validate'
+    './validate-service'
 ], function () {});

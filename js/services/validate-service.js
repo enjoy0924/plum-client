@@ -3,7 +3,7 @@
  * Created by Andy on 2015/10/11.
  */
 define(['./module'], function (services) {
-    services.service('ValidateService',['$http','REQ_URLS', function($http, REQ_URLS){
+    services.service('ValidateService',function($http, REQ_URLS){
 
         function getImageCodeUrl(){
             return REQ_URLS.URL_VALIDATE_GET_IMG_CODE+'?d='+new Date();
@@ -39,5 +39,5 @@ define(['./module'], function (services) {
             validateImageCode : validateImageCode,
             validateSmsCode : validateSmsCode
         }
-    }]);
+    });
 })

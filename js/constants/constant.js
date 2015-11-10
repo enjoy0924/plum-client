@@ -23,5 +23,7 @@ define(['./module'], function(constants){
     }).constant('USER_ROLES', {  //用户角色
         ROLE_ADMIN: 'admin_role',
         ROLE_PUBLIC: 'public_role'
-        });
+    }).constant('APP_KEYS',{     //这里暂时把app key写死，后面可能会从后台获取然后选择
+        APP_KEY_01 : '645ba616-370a-43a8-a8e0-993e7a590cf0'
+    });
 });
